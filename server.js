@@ -7,11 +7,9 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-// Accéder à la clé API sécurisée depuis les variables d'environnement de Vercel
 const apiKey = process.env.API_KEY;
 if (!apiKey) {
     console.error("La clé API n'est pas définie.");
-    // Vous pouvez gérer l'erreur de manière plus élégante en production
 }
 
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -26,7 +24,16 @@ app.post('/api/shorten', async (req, res) => {
     try {
         const prompt = `Raccourcis le titre suivant pour qu'il soit optimisé pour YouTube (moins de 60 caractères) tout en conservant son sens. Réponds uniquement avec le nouveau titre, sans texte supplémentaire : "${title}"`;
 
-        const result = await model.generateContent(prompt);
+        const result = await model.generateContent({
+            contents: [{ role: "user", parts: [{ text: prompt }] }],
+            safetySettings: [
+                { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
+            ],
+        });
+        
         const response = await result.response;
         const text = response.text();
 
@@ -37,11 +44,9 @@ app.post('/api/shorten', async (req, res) => {
     }
 });
 
-// Pour la version locale, si vous voulez tester
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Serveur démarré sur http://localhost:${port}`);
 });
 
-// Export de l'application pour Vercel (fonctions serverless)
 export default app;

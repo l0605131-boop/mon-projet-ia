@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raccourcisseur de Titres</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">Retour à la Boîte à Outils</a>
+        <h1>Raccourcisseur de Titres</h1>
+        <p>Entrez un titre long, et nous le raccourcirons pour qu'il soit plus percutant.</p>
+
+        <div class="tool-section">
+            <textarea id="long-title" placeholder="Entrez votre titre long ici..." rows="4"></textarea>
+            <button id="shorten-btn" class="button">Raccourcir</button>
+            <div id="result-area">
+                <h3>Titre raccourci :</h3>
+                <p id="shortened-title"></p>
+            </div>
+        </div>
+    </div>
+    <script src="raccourcisseur.js"></script>
+</body>
+</html>

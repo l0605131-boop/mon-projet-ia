@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyseur de Vidéo YouTube</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Analyseur de Vidéo</h1>
+        <form id="analyseForm">
+            <div class="form-group">
+                <label for="ctr">Taux de clics (CTR) en % :</label>
+                <input type="number" id="ctr" required>
+            </div>
+            <div class="form-group">
+                <label for="likes">Nombre de "J'aime" :</label>
+                <input type="number" id="likes" required>
+            </div>
+            <div class="form-group">
+                <label for="dislikes">Nombre de "Je n'aime pas" :</label>
+                <input type="number" id="dislikes" required>
+            </div>
+            <button type="submit" class="btn primary-btn">Analyser</button>
+        </form>
+        <div id="result" class="result-box">
+            </div>
+    </div>
+    <script src="analyseur.js"></script>
+</body>
+</html>
